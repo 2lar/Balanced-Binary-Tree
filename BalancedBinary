@@ -9,13 +9,10 @@ public:
 
   Node() = default;
   Node(int data, Node *l = nullptr, Node *r = nullptr)
-      : data_(data), left_(l), right_(r)
-  {
-  }
+      : data_(data), left_(l), right_(r){}
 };
 
-class BinTree
-{
+class BinTree{
 
   Node *root_ = nullptr;
   int   size_ = 0;
@@ -38,15 +35,13 @@ public:
   auto postfix() -> std::string;
   auto infix() -> std::string;
 
-  ~BinTree()
-  {
+  ~BinTree(){
     del(root_);
   }
 };
 
 auto
-    BinTree::del(Node *root) -> void
-{
+    BinTree::del(Node *root) -> void{
   if (!root)
     return;
   if (root->left_)
@@ -57,26 +52,22 @@ auto
 }
 
 auto
-    BinTree::size() -> int
-{
+    BinTree::size() -> int{
   return size(root_);
 }
 
 auto
-    BinTree::size(Node *root) -> int
-{
+    BinTree::size(Node *root) -> int{
   return root ? size(root->left_) + size(root->right_) + 1 : 0;
 }
 
 auto
-    BinTree::is_full(Node *root) -> bool
-{
+    BinTree::is_full(Node *root) -> bool{
   return size(root->left_) == size(root->right_);
 }
 
 auto
-    BinTree::insert(int d) -> void
-{
+    BinTree::insert(int d) -> void{
   if (root_ == nullptr)
     root_ = new Node{ d };
   else
@@ -84,8 +75,7 @@ auto
 }
 
 auto
-    BinTree::insert(int d, Node *root) -> void
-{
+    BinTree::insert(int d, Node *root) -> void{
   if (root->left_ == nullptr)
     root->left_ = new Node{ d };
   else if (root->right_ == nullptr)
@@ -97,8 +87,7 @@ auto
 }
 
 auto
-    BinTree::righttmost_leaf() -> int
-{
+    BinTree::righttmost_leaf() -> int{
   auto root = root_;
   while (root->right_)
     root = root->right_;
@@ -106,8 +95,7 @@ auto
 }
 
 auto
-    BinTree::leftmost_leaf() -> int
-{
+    BinTree::leftmost_leaf() -> int{
   auto root = root_;
   while (root->left_)
     root = root->left_;
@@ -115,14 +103,12 @@ auto
 }
 
 auto
-    BinTree::prefix() -> std::string
-{
+    BinTree::prefix() -> std::string{
   return prefix(root_);
 }
 
 auto
-    BinTree::prefix(Node *root) -> std::string
-{
+    BinTree::prefix(Node *root) -> std::string{
   if (root != nullptr)
     return std::to_string(root->data_) + prefix(root->left_) +
            prefix(root->right_);
@@ -130,14 +116,12 @@ auto
 }
 
 auto
-    BinTree::infix() -> std::string
-{
+    BinTree::infix() -> std::string{
   return infix(root_);
 }
 
 auto
-    BinTree::infix(Node *root) -> std::string
-{
+    BinTree::infix(Node *root) -> std::string{
   if (root)
     return infix(root->left_) + std::to_string(root->data_) +
            infix(root->right_);
@@ -145,14 +129,12 @@ auto
 }
 
 auto
-    BinTree::postfix() -> std::string
-{
+    BinTree::postfix() -> std::string{
   return postfix(root_);
 }
 
 auto
-    BinTree::postfix(Node *root) -> std::string
-{
+    BinTree::postfix(Node *root) -> std::string{
   if (root)
     return postfix(root->left_) + postfix(root->right_) +
            std::to_string(root->data_);
